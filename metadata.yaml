@@ -1,0 +1,29 @@
+# Copyright 2021 Alex Litvinov
+# See LICENSE file for licensing details.
+name: charm-nats-k8s
+description: |
+  Minimal NATS and NATS Streaming
+  See https://nats.io/ for more information 
+summary: |
+  NATS charmed operator for Kubernetes
+
+containers:
+  nats:
+    resource: nats-image
+
+resources:
+  nats-image:
+    type: oci-image
+    description:  |
+      OCI image for nats.
+    auto-fetch: true
+    upstream-source: nats:2.1.7-alpine3.11
+
+requires:
+  ingress:
+    interface: ingress
+
+peers:
+  cluster:
+    interface: nats-cluster
+
