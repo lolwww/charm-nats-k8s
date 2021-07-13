@@ -32,3 +32,24 @@ options:
     default: 6222
     description: port for nats clustering
 
+  user:
+    type: string
+    default: user
+    description: username
+
+  password:
+    type: string
+    default: changeit
+    description: system user password
+
+  system_user:
+    type: string
+    default: admin
+    description: system username
+
+  system_password:
+    type: string
+    default: changeit
+    description: system user password
+
+
