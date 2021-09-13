@@ -3,6 +3,7 @@
 ## Description
 
 An operator, that manages the lifecycle of NATS Core Server.
+
 NATS is an open-source, cloud-native, high-performance messaging system.
 
 https://docs.nats.io/nats-concepts/intro
