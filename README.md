@@ -10,7 +10,7 @@ https://docs.nats.io/nats-concepts/intro
 
 ## Usage
 
-The `charm-nats-server-k8s` charm deploys NATS Server (Core) on top of Kubernetes:
+The `charm-nats-server-k8s` charm deploys NATS Core Server  on top of Kubernetes:
 
 
     juju deploy --resource 
