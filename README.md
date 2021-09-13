@@ -44,3 +44,11 @@ The Python operator framework includes a very nice harness for testing
 operator behaviour without full deployment. Just `run_tests`:
 
     ./run_tests
+    
+## Roadmap to completion
+
+What is needed before this charm could be considered complete
+and production ready:
+
+1. 
+2. Add tests with pytest-operator for maintainability
