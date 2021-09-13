@@ -1,4 +1,4 @@
-# charm-nats-k8s
+# charm-nats-server-k8s
 
 ## Description
 
