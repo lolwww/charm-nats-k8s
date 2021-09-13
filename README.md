@@ -2,12 +2,32 @@
 
 ## Description
 
-TODO: Describe your charm in a few paragraphs of Markdown
+An operator, that manages the lifecycle of NATS Core Server.
+NATS is an open-source, cloud-native, high-performance messaging system.
+
+https://docs.nats.io/nats-concepts/intro
 
 ## Usage
 
-TODO: Provide high-level usage, such as required config or relations
+The `charm-nats-server-k8s` charm deploys NATS Server (Core) on top of Kubernetes:
 
+
+    juju deploy --resource 
+    nats-image=nats:2.1.7-alpine3.11
+        charm-nats-server-k8s
+
+### Adding New Units and Scaling
+
+Charm supports running multiple units of NATS Server and applying the necessary configuration
+to all of the running units.
+
+To add a unit to a deployed application use:
+
+    juju add-unit charm-nats-server-k8s
+
+To scale the application to have a particular number of units use:
+
+    juju scale-application charm-nats-server-k8s 3
 
 ## Developing
 
