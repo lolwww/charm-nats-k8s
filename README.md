@@ -1,4 +1,4 @@
-# charm-nats-server-k8s
+# nats-server-operator
 
 ## Description
 
@@ -10,12 +10,12 @@ https://docs.nats.io/nats-concepts/intro
 
 ## Usage
 
-The `charm-nats-server-k8s` charm deploys NATS Core Server  on top of Kubernetes:
+The `nats-server-operator` charm deploys NATS Core Server  on top of Kubernetes:
 
 
     juju deploy --resource 
     nats-image=nats:2.1.7-alpine3.11
-        charm-nats-server-k8s
+        nats-server-operator
 
 ### Adding New Units and Scaling
 
@@ -24,11 +24,11 @@ to all of the running units.
 
 To add a unit to a deployed application use:
 
-    juju add-unit charm-nats-server-k8s
+    juju add-unit nats-server-operator
 
 To scale the application to have a particular number of units use:
 
-    juju scale-application charm-nats-server-k8s 3
+    juju scale-application nats-server-operator 3
 
 ## Developing
 
