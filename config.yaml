@@ -14,7 +14,7 @@ options:
 
   nats_version:
     default: 2.1.7
-    description: External hostname to access NATS
+    description:
     type: string
 
   client_port:
@@ -40,7 +40,7 @@ options:
   password:
     type: string
     default: changeit
-    description: system user password
+    description: password
 
   system_user:
     type: string
@@ -52,4 +52,12 @@ options:
     default: changeit
     description: system user password
 
+  tls_cert:
+    type: string
+    default:
+    description: A TLS server certificate to be used by NATS
 
+  tls_key:
+    type: string
+    default:
+    description: A TLS server key to be used by NATS.
