@@ -42,6 +42,7 @@ Configure tls_cert and tls_key parameters with juju
 To be able to reach NATS Server from outside of cluster - add relation to nginx-ingress-integrator:
 
     juju deploy nginx-ingress-integrator ingress
+    
     juju relate ingress nats-server-operator
 
 ## Developing
