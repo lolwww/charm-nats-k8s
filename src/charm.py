@@ -239,4 +239,4 @@ class NatsOperator(CharmBase):
 
 
 if __name__ == "__main__":
-    main(KnotOperator)
+    main(NatsOperator)
