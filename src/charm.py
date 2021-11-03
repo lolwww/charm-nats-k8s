@@ -17,7 +17,7 @@ from charms.nginx_ingress_integrator.v0.ingress import IngressRequires
 logger = logging.getLogger(__name__)
 
 
-class CharmNatsK8SCharm(CharmBase):
+class NatsOperator(CharmBase):
 
     __PEBBLE_SERVICE_NAME = 'nats'
     __ADDR_CLUSTER_REL_DATA_KEY = 'ingress-address'
@@ -77,7 +77,7 @@ class CharmNatsK8SCharm(CharmBase):
         logging.debug('Handling Juju config change')
 
         cluster_relation = self.model.get_relation('cluster')
-        # try?
+
         my_address = self._get_my_address(cluster_relation)
         self._share_address_with_peers(my_address, cluster_relation)
 
@@ -88,6 +88,8 @@ class CharmNatsK8SCharm(CharmBase):
         self.__update_nats_config(container, all_unit_addresses)
 
         self.__restart_nats(container)
+
+        self.ingress.update_config({"service-hostname": self.config["external_hostname"]})
 
         logging.info("Restarted NATS service")
 
@@ -162,11 +164,13 @@ class CharmNatsK8SCharm(CharmBase):
         :param all_unit_addresses: Each unit's address.
         :type all_unit_addresses: List[str]
         """
-
         config_file_path = '/etc/nats/nats-server.conf'
 
-        cluster_port = self.config['cluster_port']
+        config_template = 'nats-server.conf'
+        template_tls = 'nats-server-tls.conf'
+
         client_port = self.config['client_port']
+        cluster_port = self.config['cluster_port']
         monitor_port = self.config['monitor_port']
         user = self.config['user']
         sys_user = self.config['system_user']
@@ -180,11 +184,22 @@ class CharmNatsK8SCharm(CharmBase):
 
         logging.debug('Writing config to {}'.format(config_file_path))
 
-        self._push_template(workload_container, 'nats-server.conf', config_file_path,
-                            {'cluster_port': cluster_port, 'client_port': client_port,
-                             'monitor_port': monitor_port, 'routes': routes_prepared,
-                             'user': user, 'password': password, "sys_user": sys_user,
-                             "sys_pass": sys_password})
+        template_params = {'cluster_port': cluster_port, 'client_port': client_port,
+                           'monitor_port': monitor_port, 'routes': routes_prepared,
+                           'user': user, 'password': password, "sys_user": sys_user,
+                           "sys_pass": sys_password}
+
+        if 'tls_cert' in self.config and 'tls_key' in self.config:
+            tls_cert_path = "/etc/nats/tls_cert.pem"
+            tls_key_path = "/etc/nats/tls_key.pem"
+            config_template = template_tls
+            workload_container.push(tls_cert_path, self.config['tls_cert'], make_dirs=True)
+            workload_container.push(tls_key_path, self.config['tls_key'], make_dirs=True)
+            template_params['cert_file'] = tls_cert_path
+            template_params['key_file'] = tls_key_path
+
+        self._push_template(workload_container, config_template, config_file_path,
+                            template_params)
 
     def __restart_nats(self, workload_container):
         """Restart NATS by restarting the Pebble services.
@@ -202,7 +217,9 @@ class CharmNatsK8SCharm(CharmBase):
         # Autostart any services that were defined with startup: enabled :
         workload_container.autostart()
 
-    def _push_template(self, container, template_name, target_path, context={}):
+    def _push_template(self, container, template_name, target_path, context=None):
+        if context is None:
+            context = {}
         if self._template_env is None:
             self._template_env = Environment(loader=FileSystemLoader(
                 f'{self.charm_dir}/templates'))
@@ -222,4 +239,4 @@ class CharmNatsK8SCharm(CharmBase):
 
 
 if __name__ == "__main__":
-    main(CharmNatsK8SCharm)
+    main(NatsOperator)
