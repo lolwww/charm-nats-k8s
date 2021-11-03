@@ -17,7 +17,7 @@ from charms.nginx_ingress_integrator.v0.ingress import IngressRequires
 logger = logging.getLogger(__name__)
 
 
-class CharmNatsK8SCharm(CharmBase):
+class NatsOperator(CharmBase):
 
     __PEBBLE_SERVICE_NAME = 'nats'
     __ADDR_CLUSTER_REL_DATA_KEY = 'ingress-address'
@@ -239,4 +239,4 @@ class CharmNatsK8SCharm(CharmBase):
 
 
 if __name__ == "__main__":
-    main(CharmNatsK8SCharm)
+    main(KnotOperator)
