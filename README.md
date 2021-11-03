@@ -67,3 +67,4 @@ and production ready:
 
 1. Add tests with pytest-operator for maintainability
 2. Add TLS scenario through relation with easyrsa
+3. Add NATS Streaming (aka STAN) support
