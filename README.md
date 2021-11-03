@@ -28,7 +28,7 @@ To scale the application to have a particular number of units use:
 
     juju scale-application nats-server-operator 3
 
-### Adding New Units and Scaling
+### TLS
 
 Charm supports running NATS Server with simple TLS scenario by manually specifying tls_cert and tls_key
 Configure tls_cert and tls_key parameters with juju
@@ -36,6 +36,13 @@ Configure tls_cert and tls_key parameters with juju
     juju config nats-server-operator tls_key="$(cat nats-server-tls.key)"
     
     juju config nats-server-operator tls_cert="$(cat nats-server-cert.crt)"
+
+### Ingress
+
+To be able to reach NATS Server from outside of cluster - add relation to nginx-ingress-integrator:
+
+    juju deploy nginx-ingress-integrator ingress
+    juju relate ingress nats-server-operator
 
 ## Developing
 
