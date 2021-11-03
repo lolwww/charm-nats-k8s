@@ -1,6 +1,6 @@
 # Copyright 2021 Alex Litvinov
 # See LICENSE file for licensing details.
-name: charm-nats-k8s
+name: nats-server-operator
 description: |
   Minimal NATS and NATS Streaming
   See https://nats.io/ for more information 
