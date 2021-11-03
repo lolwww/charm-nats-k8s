@@ -33,9 +33,9 @@ To scale the application to have a particular number of units use:
 Charm supports running NATS Server with simple TLS scenario:
 Configure tls_cert and tls_key parameters with juju
 
-juju config nats-server-operator tls_key="$(cat nats-server.key)"
-
-juju config nats-server-operator tls_cert="$(cat nats-server.crt)"
+    juju config nats-server-operator tls_key="$(cat nats-server.key)"
+    
+    juju config nats-server-operator tls_cert="$(cat nats-server.crt)"
 
 ## Developing
 
