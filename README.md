@@ -30,6 +30,15 @@ To scale the application to have a particular number of units use:
 
     juju scale-application nats-server-operator 3
 
+### Adding New Units and Scaling
+
+Charm supports running NATS Server with simple TLS scenario:
+Configure tls_cert and tls_key parameters with juju
+
+juju config nats-server-operator tls_key="$(cat nats-server.key)"
+
+juju config nats-server-operator tls_cert="$(cat nats-server.crt)"
+
 ## Developing
 
 Create and activate a virtualenv with the development requirements:
@@ -50,5 +59,5 @@ operator behaviour without full deployment. Just `run_tests`:
 What is needed before this charm could be considered complete
 and production ready:
 
-1. 
-2. Add tests with pytest-operator for maintainability
+1. Add tests with pytest-operator for maintainability
+2. Add TLS scenario through relation with easyrsa
