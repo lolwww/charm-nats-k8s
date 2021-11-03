@@ -30,7 +30,7 @@ To scale the application to have a particular number of units use:
 
 ### Adding New Units and Scaling
 
-Charm supports running NATS Server with simple TLS scenario:
+Charm supports running NATS Server with simple TLS scenario by manually specifying tls_cert and tls_key
 Configure tls_cert and tls_key parameters with juju
 
     juju config nats-server-operator tls_key="$(cat nats-server.key)"
