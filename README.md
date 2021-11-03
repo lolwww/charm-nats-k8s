@@ -13,9 +13,7 @@ https://docs.nats.io/nats-concepts/intro
 The `nats-server-operator` charm deploys NATS Core Server  on top of Kubernetes:
 
 
-    juju deploy --resource 
-    nats-image=nats:2.1.7-alpine3.11
-        nats-server-operator
+    juju deploy --resource nats-image=nats:2.1.7-alpine3.11 nats-server-operator
 
 ### Adding New Units and Scaling
 
